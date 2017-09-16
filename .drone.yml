@@ -20,7 +20,7 @@ pipeline:
     commands:
     - free -m
     - >
-      for stat in memory.limit_in_bytes memory.max_usage_in_bytes ; do \
-        echo -n "$stat:    " ; \
-        cat /sys/fs/cgroup/memory/$stat ; \
+      for stat in memory.limit_in_bytes memory.max_usage_in_bytes ; do
+        echo -n "$stat:    "
+        cat /sys/fs/cgroup/memory/$stat
       done
