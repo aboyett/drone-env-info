@@ -3,7 +3,7 @@ pipeline:
     image: alpine:3.6
     commands:
     - whoami
-    - env
+    - env | sort
 
   fs-info:
     image: alpine:3.6
