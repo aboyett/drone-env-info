@@ -8,9 +8,10 @@ pipeline:
   fs-info:
     image: alpine:3.6
     commands:
-    - ls -la ./
-    - ls -la ${HOME}
-    - ls -la /
+    # echo true on failure to prevent premature exit of build
+    - ls -la ./ || true
+    - ls -la ${HOME} || true
+    - ls -la / || true
     - mount
     - df -h
 
