@@ -3,14 +3,15 @@ pipeline:
     image: alpine:3.6
     commands:
     - whoami
-    - env
+    - env | sort
 
   fs-info:
     image: alpine:3.6
     commands:
-    - ls -la ./
-    - ls -la ${HOME}
-    - ls -la /
+    # echo true on failure to prevent premature exit of build
+    - ls -la ./ || true
+    - ls -la ${HOME} || true
+    - ls -la / || true
     - mount
     - df -h
 
@@ -19,7 +20,7 @@ pipeline:
     commands:
     - free -m
     - >
-      for stat in memory.limit_in_bytes memory.max_usage_in_bytes ; do \
-        echo -n "$stat:    " ; \
-        cat /sys/fs/cgroup/memory/$stat ; \
+      for stat in memory.limit_in_bytes memory.max_usage_in_bytes ; do
+        echo -n "$stat:    "
+        cat /sys/fs/cgroup/memory/$stat
       done
